@@ -77,7 +77,7 @@ def calculate(url, username, password, print_grade=True):
         overall += (cat_marks_earned / cat_total) * weightings[category]
 
     rounded_overall = round(overall * 100, 2)
-    if print_grades:
+    if print_grade:
         print(f"Overall Math Grade: {rounded_overall}%")
 
     return rounded_overall
