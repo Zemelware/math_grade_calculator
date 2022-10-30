@@ -6,4 +6,5 @@ password = input("Enter your Edsby password: ")
 
 print("Calculating. This may take a few seconds...")
 
-mc.calculate(url, username, password)
+grade = mc.calculate(url, username, password)
+print(f"Overall Math Grade: {grade}%")

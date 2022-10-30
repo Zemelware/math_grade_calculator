@@ -22,8 +22,7 @@ def driver_init():
     options.binary_location = "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser"
 
     global driver
-    driver = webdriver.Chrome(service=Service(
-        ChromeDriverManager().install()), options=options)
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
     # Always wait max 15 seconds for elements to load
     driver.implicitly_wait(15)
@@ -31,10 +30,8 @@ def driver_init():
 
 def login(url, username, password):
     driver.get(url)
-    username_field = driver.find_element(
-        By.ID, '3loginform-login-userid__f__')
-    username_field.send_keys(
-        login_info.username, Keys.TAB, login_info.password, Keys.ENTER)
+    username_field = driver.find_element(By.ID, '3loginform-login-userid__f__')
+    username_field.send_keys(login_info.username, Keys.TAB, login_info.password, Keys.ENTER)
 
     # Wait for the page to load
     wait = WebDriverWait(driver, 15)
@@ -60,7 +57,7 @@ def load_grades():
     return grades
 
 
-def calculate(url, username, password, print_grade=True):
+def calculate(url, username, password):
     driver_init()
     login(url, username, password)
     grades_dict = load_grades()
@@ -77,12 +74,9 @@ def calculate(url, username, password, print_grade=True):
         overall += (cat_marks_earned / cat_total) * weightings[category]
 
     rounded_overall = round(overall * 100, 2)
-    if print_grade:
-        print(f"Overall Math Grade: {rounded_overall}%")
 
     return rounded_overall
 
 
 if __name__ == "__main__":
-    calculate(url=login_info.url, username=login_info.username,
-              password=login_info.password)
+    calculate(url=login_info.url, username=login_info.username, password=login_info.password)
